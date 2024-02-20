@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FlickerImages</string>
+    <string name="error_message">Please try again later</string>
+    <string name="retry">Retry</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="author">Author</string>
+    <string name="search">Search...</string>
+    <string name="published_date">Published Date</string>
+    <string name="search_info">Search Flickr for images. \nThe search string can be a single
+        word (such as “porcupine”) or comma-separated words (such as “forest, bird”).</string>
+
+</resources>

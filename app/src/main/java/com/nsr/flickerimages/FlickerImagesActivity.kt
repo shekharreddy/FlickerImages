@@ -70,19 +70,18 @@ class FlickerImagesActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "SearchHomeScreen"
+                    startDestination = navigation_home
                 ) {
-                    composable("SearchHomeScreen") {
+                    composable(navigation_home) {
                         SearchHomeScreen(navController)
                     }
-                    composable("SearchItemDetails") {
+                    composable(navigation_details) {
                         SearchItemDetails()
                     }
                 }
             }
         }
     }
-
 
     @Composable
     fun SearchHomeScreen(navController: NavHostController) {
@@ -122,9 +121,9 @@ class FlickerImagesActivity : ComponentActivity() {
                         ),
                         onValueChange = {
                             searchQuery = it
-                           if(it.isNotBlank()) {
-                               viewModel.fetchFlickerImages(it)
-                           }
+                            if(it.isNotBlank()) {
+                                viewModel.fetchFlickerImages(it)
+                            }
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -254,7 +253,7 @@ class FlickerImagesActivity : ComponentActivity() {
                         modifier = Modifier
                             .clickable {
                                 viewModel.setCurrentSelectedItem(flickerItems[index])
-                                navController.navigate("SearchItemDetails")
+                                navController.navigate(navigation_details)
                             }
                             .aspectRatio(1.333f)
                             .clip(RoundedCornerShape(4.dp))
@@ -262,5 +261,10 @@ class FlickerImagesActivity : ComponentActivity() {
                 }
             }
         )
+    }
+
+    private companion object {
+        const val navigation_home = "SearchHomeScreen"
+        const val navigation_details = "SearchItemDetails"
     }
 }

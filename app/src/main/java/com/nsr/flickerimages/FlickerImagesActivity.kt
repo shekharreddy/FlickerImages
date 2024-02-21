@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -154,13 +153,13 @@ class FlickerImagesActivity : ComponentActivity() {
                 Image(
                     painter = rememberAsyncImagePainter(it.imageURL),
                     contentDescription = null,
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.FillBounds,
                     modifier = Modifier
-                        .fillMaxWidth(1f)
-                        .aspectRatio(1.333f)
+                        .align(alignment =  Alignment.CenterHorizontally)
+                        .size(it.widthHeight.first.dp, it.widthHeight.second.dp)
                         .clip(RoundedCornerShape(5.dp))
-
                 )
+
                 Text(
                     text = annotatedString(
                         stringResource(id = R.string.dimensions),
@@ -262,7 +261,10 @@ class FlickerImagesActivity : ComponentActivity() {
                                 viewModel.setCurrentSelectedItem(flickerItems[index])
                                 navController.navigate(navigation_details)
                             }
-                            .size(flickerItems[index].widthHeight.first.dp, flickerItems[index].widthHeight.second.dp)
+                            .size(
+                                flickerItems[index].widthHeight.first.dp,
+                                flickerItems[index].widthHeight.second.dp
+                            )
                             .clip(RoundedCornerShape(4.dp))
                     )
                 }

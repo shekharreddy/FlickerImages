@@ -6,6 +6,7 @@ import com.nsr.flickerimages.R
 import com.nsr.flickerimages.model.FlickerSearchResponse
 import com.nsr.flickerimages.network.ApiHelper
 import com.nsr.flickerimages.network.ResponseResource
+import com.nsr.flickerimages.utils.extractWidthAndHeight
 import com.nsr.flickerimages.utils.formatDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +58,8 @@ class FlickerImagesViewModel @Inject constructor(private val apiHelper: ApiHelpe
                     title = it.title,
                     description = it.description,
                     author = it.author,
-                    publishedDate = formatDate(it.date_taken)
+                    publishedDate = formatDate(it.date_taken),
+                    widthHeight = extractWidthAndHeight(it.description)
                 )
             )
         }.also {
@@ -78,4 +80,5 @@ data class FlickerUIItem(
     val description: String? = null,
     val author: String? = null,
     val publishedDate: String? = null,
+    val widthHeight: Pair<Int, Int>
 )

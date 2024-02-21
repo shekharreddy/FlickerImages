@@ -25,7 +25,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.io.IOException
 
 @ExperimentalCoroutinesApi
 class FlickerImagesViewModelTest {
@@ -86,7 +85,8 @@ class FlickerImagesViewModelTest {
             description = "Rain - light rain",
             author = "nobody@flickr.com (joemastrullo)",
             imageURL = "https://live.staticflickr.com/65535/53529914873_f11e77c6a7_m.jpg",
-            publishedDate = "02-14-2024"
+            publishedDate = "02-14-2024",
+            widthHeight = Pair(160, 120)
         )
 
         val apiResponse = FlickerSearchResponse(

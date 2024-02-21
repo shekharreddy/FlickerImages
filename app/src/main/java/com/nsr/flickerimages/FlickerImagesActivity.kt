@@ -16,9 +16,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -160,6 +161,12 @@ class FlickerImagesActivity : ComponentActivity() {
                         .clip(RoundedCornerShape(5.dp))
 
                 )
+                Text(
+                    text = annotatedString(
+                        stringResource(id = R.string.dimensions),
+                        "${it.widthHeight.first} by ${it.widthHeight.second}"
+                    )
+                )
 
                 Text(
                     text = annotatedString(
@@ -239,10 +246,10 @@ class FlickerImagesActivity : ComponentActivity() {
 
     @Composable
     fun UpdateUIWithFlickerImages(flickerItems: List<FlickerUIItem>, navController: NavHostController){
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2), // TODO adjust the count for mobile and tablet devices by checking tablet or mobile device
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2), // TODO adjust the count for mobile and tablet devices by checking tablet or mobile device
             horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalItemSpacing = 8.dp,
 
             content = {
                 items(flickerItems.size) { index ->
@@ -255,7 +262,7 @@ class FlickerImagesActivity : ComponentActivity() {
                                 viewModel.setCurrentSelectedItem(flickerItems[index])
                                 navController.navigate(navigation_details)
                             }
-                            .aspectRatio(1.333f)
+                            .size(flickerItems[index].widthHeight.first.dp, flickerItems[index].widthHeight.second.dp)
                             .clip(RoundedCornerShape(4.dp))
                     )
                 }
